@@ -1,0 +1,19 @@
+.content {
+    flex: 1 1 75vh;
+    background: #2A2A2A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    .container-img {
+        position: absolute;
+
+        img {
+            object-fit: contain;
+            max-width: 100%;
+            max-height: 75vh;
+        }
+    }
+    
+}

@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { FC, useState } from "react";
+import Content from "./components/content/Content";
+import Footer from "./components/footer/Footer";
+import Header from "./components/header/Header";
+import Wrapper from "./components/wrapper/Wrapper";
+import { useTypedSelector } from "./redux/store";
+import "./App.scss";
+import Loader from "./components/loader/Loader";
 
-function App() {
+const App: FC = () => {
+  const [imgUrl, setImgUrl] = useState<string | null>(null);
+  const { error, loading } = useTypedSelector((state) => state.annotations);
+
+  if (error) {
+    alert(error);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Wrapper>
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <Header setImgUrl={setImgUrl} />
+          <Content imgUrl={imgUrl} />
+          <Footer />
+        </>
+      )}
+    </Wrapper>
   );
-}
+};
 
 export default App;
